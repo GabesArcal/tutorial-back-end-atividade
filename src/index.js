@@ -75,6 +75,23 @@ app.put("/alunos/:id", (req, res) => {
     }
 })
 
+app.patch("/alunos/:id", (req, res) => {
+    const id = parseInt(req.params.id);
+    const aluno = alunos.find((aluno) => aluno.id === id);
+
+    if (aluno) {
+        const { nome, idade, matricula } = req.body;
+
+        if (nome !== undefined) aluno.nome = nome;
+        if (idade !== undefined) aluno.idade = idade;
+        if (matricula !== undefined) aluno.matricula = matricula;
+
+        res.status(200).send("Dados atualizados com sucesso!");
+    } else {
+        res.status(404).send("Aluno não encontrado");
+    }
+})
+
 // Iniciamos o servidor
 app.listen(port, () => {
   console.log(`Servidor rodando em http://localhost:${port}`);
