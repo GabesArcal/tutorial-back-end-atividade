@@ -39,6 +39,17 @@ app.get("/alunos", (req, res) => {
     res.send(alunos);
 });
 
+app.get("/alunos/:id", (req, res) => {
+
+    const id = parseInt(req.params.id);
+    const aluno = alunos.find((aluno) => aluno.id === id );
+
+    if (aluno) {
+        res.json(aluno);
+    } else {
+        res.status(404).json({ error: "Aluno não encontrado"})
+    }
+});
 
 
 
