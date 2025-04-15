@@ -60,6 +60,21 @@ app.post("/alunos", (req, res) => {
 })
 
 
+app.put("/alunos/:id", (req, res) => {
+    const id = parseInt(req.params.id);
+    const aluno = alunos.find((aluno) => aluno.id === id);
+
+    if (aluno) {
+        const { nome, idade, matricula } = req.body;
+        aluno.nome = nome;
+        aluno.idade = idade;
+        aluno.matricula = matricula;
+        res.status(200).send("Mudança concluida");
+    } else {
+        res.status(404).send("Aluno não existe")
+    }
+})
+
 // Iniciamos o servidor
 app.listen(port, () => {
   console.log(`Servidor rodando em http://localhost:${port}`);
