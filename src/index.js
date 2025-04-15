@@ -51,6 +51,13 @@ app.get("/alunos/:id", (req, res) => {
     }
 });
 
+app.post("/alunos", (req, res) => {
+    const { nome, idade, matricula } = req.body;
+    const id = alunos.length + 1;
+
+    alunos.push({ id, nome, idade, matricula});
+    res.status(201).location(`/alunos/${id}`).send();
+})
 
 
 // Iniciamos o servidor
