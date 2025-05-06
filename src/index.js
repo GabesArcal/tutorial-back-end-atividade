@@ -92,7 +92,21 @@ app.patch("/alunos/:id", (req, res) => {
     }
 })
 
-// Iniciamos o servidor
+app.delete("/alunos/:id", (req, res) => {
+    const id = parseInt(req.params.id); 
+    const index = produtos.findIndex((aluno) => aluno.id === id); 
+
+      if(index !== -1) { 
+        alunos.splice(index, 1) 
+        res.status(200).send();
+      } else {
+        res.status(404).send();
+      }
+  })
+
+
+
+
 app.listen(port, () => {
   console.log(`Servidor rodando em http://localhost:${port}`);
 });
